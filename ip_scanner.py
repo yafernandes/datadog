@@ -23,7 +23,7 @@ def scan(ip, port):
 def scan_endpoint(fqdn, port):
     print(f'\n\n=== Testing endpoint {fqdn} on port {port} ===\n')
     with ThreadPoolExecutor(max_workers=128) as executor:
-        answers = dns.resolver.query("intake.logs.datadoghq.com", 'A')
+        answers = dns.resolver.query(fqdn, 'A')
         for server in answers:
             executor.submit(scan, server.address, port)
         executor.shutdown(wait=True)
