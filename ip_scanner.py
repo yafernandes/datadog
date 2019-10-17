@@ -25,7 +25,7 @@ def scan_endpoint(fqdn, port):
     with ThreadPoolExecutor(max_workers=128) as executor:
         answers = dns.resolver.query("intake.logs.datadoghq.com", 'A')
         for server in answers:
-            executor.submit(scan, server.address, 10516)
+            executor.submit(scan, server.address, port)
         executor.shutdown(wait=True)
 
 def scan_iprange(service, port):
