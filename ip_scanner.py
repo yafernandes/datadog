@@ -16,7 +16,7 @@ def scan(ip, port):
         print(f'{ip}:{port}\tOpen')
         sock.close()
     except Exception as e:
-        print(f'{ip}:{port} \tFailed\t{e}')
+        print(f'{ip}:{port}\tFailed\t{e}')
     finally:
         sock.close()
 
