@@ -63,6 +63,8 @@ spec:
             mountPath: /var/log/pods
           - name: logcontainerpath
             mountPath: /var/lib/docker/containers
+          - name: pointdir
+            mountPath: /opt/datadog-agent/run
           - name: empty-dir
             mountPath: /etc/datadog-agent/conf.d/disk.d
           - name: empty-dir
@@ -76,6 +78,9 @@ spec:
         - name: logcontainerpath
           hostPath:
             path: /var/lib/docker/containers
+        - name: pointdir
+          hostPath:
+            path: /opt/datadog-agent/run
         - name: empty-dir
           emptyDir: {}
       tolerations:
