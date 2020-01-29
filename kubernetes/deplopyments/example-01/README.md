@@ -11,6 +11,7 @@
 * Namespaced RBAC (No ClusterRole)
 * Proxy setup
 * Log compression
+* Includes tolertion for master nodes
 * Disk integration disabled.
   * Error `FileNotFoundError: [Errno 2] No such file or directory: '/host/proc/filesystems'`
 * Kubernetes API Server integrations disabled.
