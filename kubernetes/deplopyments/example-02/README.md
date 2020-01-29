@@ -5,6 +5,7 @@
   * Helm 3.0.2
   * Datadog Chart 1.39.5
 * Deploy with `helm install datadog stable/datadog -f datadog-values.yaml`
+* Generate the yaml files for deployment with `helm template datadog stable/datadog -f datadog-values.yaml`
 * etcd v3 configured
 * Kubernetes controller integration enabled
 * Kuerbetes scheduler integration enabled
