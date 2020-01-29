@@ -4,18 +4,25 @@ metadata:
   name: datadog-agent
 rules:
   - apiGroups:
+    - ""
+    resources:
+    - services
+    - events
+    - endpoints
+    - pods
+    - nodes
+    - componentstatuses
+    verbs:
+    - get
+    - list
+    - watch
+  - apiGroups:
       - ""
     resources:
       - nodes/metrics
       - nodes/spec
       - nodes/proxy
       - nodes/stats
-    verbs:
-      - get
-  - apiGroups: # leader election check
-      - ""
-    resources:
-      - endpoints
     verbs:
       - get
 ---
