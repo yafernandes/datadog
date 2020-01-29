@@ -65,6 +65,10 @@ spec:
             mountPath: /var/lib/docker/containers
           - name: empty-dir
             mountPath: /etc/datadog-agent/conf.d/disk.d
+          - name: empty-dir
+            mountPath: /etc/datadog-agent/conf.d/kube_apiserver_metrics.d
+          - name: empty-dir
+            mountPath: /etc/datadog-agent/conf.d/etcd.d
       volumes:
         - name: logpodpath
           hostPath:
