@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: datadog-agent
+spec:
+  selector:
+    matchLabels:
+      name: datadog-agent
+  template:
+    metadata:
+      name: datadog-agent
+      labels:
+        name: datadog-agent
+    spec:
+      serviceAccountName: datadog-agent
+      containers:
+      - name: datadog-agent
+        image: datadog/agent:latest
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "200m"
+          limits:
+            memory: "512Mi"
+            cpu: "256m"
+        ports:
+          - containerPort: 8126
+            hostPort: 8126
+            name: traceport
+            protocol: TCP
+        env:
+          - name: DD_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: dd
+                key: api-key
+          - name: KUBERNETES
+            value: "true"
+          - name: DD_KUBERNETES_KUBELET_HOST
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP
+          - name: DD_APM_ENABLED
+            value: "true"
+          - name: DD_APM_NON_LOCAL_TRAFFIC
+            value: "true"
+          - name: DD_LOGS_ENABLED
+            value: "true"
+          - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
+            value: "true"
+          - name: DD_PROXY_HTTP
+            value: "http://ec2-54-188-229-107.us-west-2.compute.amazonaws.com:3128/"
+          - name: DD_PROXY_HTTPS
+            value: "http://ec2-54-188-229-107.us-west-2.compute.amazonaws.com:3128/"
+          - name: DD_LOGS_CONFIG_USE_HTTP
+            value: "true"
+          - name: DD_LOGS_CONFIG_USE_COMPRESSION
+            value: "true"
+          - name: DD_LOGS_CONFIG_COMPRESSION_LEVEL
+            value: "9"
+        volumeMounts:
+          - name: logpodpath
+            mountPath: /var/log/pods
+          - name: logcontainerpath
+            mountPath: /var/lib/docker/containers
+          - name: empty-dir
+            mountPath: /etc/datadog-agent/conf.d/disk.d
+      volumes:
+        - name: logpodpath
+          hostPath:
+            path: /var/log/pods
+        - name: logcontainerpath
+          hostPath:
+            path: /var/lib/docker/containers
+        - name: empty-dir
+          emptyDir: {}
+      tolerations:
+        - key: node-role.kubernetes.io/master
+          operator: "Exists"
+          effect: NoSchedule
