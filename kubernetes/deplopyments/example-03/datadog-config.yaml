@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dd-agent-confd
+data:
+  etcd.yaml: |-
+    ad_identifiers:
+      - etcd
+    init_config:
+    instances:
+      - use_preview: true
+        prometheus_url: https://%%host%%:2379/metrics
+        ssl_ca_cert: /etc/kubernetes/pki/etcd/ca.crt
+        ssl_cert: /etc/kubernetes/pki/etcd/peer.crt
+        ssl_private_key: /etc/kubernetes/pki/etcd/peer.key
+  kube_controller_manager.yaml: |-
+    ad_identifiers:
+      - kube-controller-manager
+      - kube-controller-manager-amd64  # OpenShift
+    init_config:
+    instances:
+    - prometheus_url: http://%%host%%:10252/metrics
+  kube_scheduler.yaml: |-
+    ad_identifiers:
+      - kube-scheduler
+      - kube-scheduler-amd64  # OpenShift
+    init_config:
+    instances:
+      - prometheus_url: http://%%host%%:10251/metrics
