@@ -20,6 +20,7 @@ process_config:
 ## IIS - [iis.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/iis/datadog_checks/iis/data/conf.yaml.example)
 
 Make sure that `ddagentuser` has access to IIS logs.
+
 Datadog agent by default limits the numbers of files it can tail to 100. It is possible to [increase this number](https://docs.datadoghq.com/logs/faq/how-to-increase-the-number-of-log-files-tailed-by-the-agent/). It is recommended to clean up old logs files and adopt a rotation strategy that compresses, or renames, old logs.
 
 ```yaml
@@ -36,7 +37,15 @@ logs:
 
 It assumes all standard fields selected and `x-datadog-trace-id` as a custom field.
 
-![Logging fields](img/iis_logging_fields.jpg)
+<img src="img/iis_logging_fields.jpg" width="400px"/>
+
+IIS outputs a line like the one below at the top of logs files. You can check what fields, and order, is included in your logs.
+
+```text
+#Fields: date time s-sitename s-computername s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs-version cs(User-Agent) cs(Cookie) cs(Referer) cs-host sc-status sc-substatus sc-win32-status sc-bytes cs-bytes time-taken trace-id
+```
+
+### Parsing rules
 
 ```grok
 iis.everything %{_date_time} %{_s_sitename} %{_s_computername} %{_s_ip} %{_cs_method} %{_cs_uri_stem} %{_cs_uri_query} %{_s_port} %{_cs_username} %{_c_ip} %{_cs_version} %{_cs_User_Agent} %{_cs_Cookie} %{_cs_Referer} %{_cs_host} %{_sc_status} %{_sc_substatus} %{_sc_win32_status} %{_sc_bytes} %{_cs_bytes} %{_time_taken} %{_trace_id}
