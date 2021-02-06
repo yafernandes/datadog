@@ -1,0 +1,27 @@
+{
+	"name": "High CPU on {{host.name}}",
+	"type": "metric alert",
+	"query": "max(last_15m):avg:system.cpu.idle{*} by {host} < 10",
+	"message": "Please investigate either via [live processes](https://app.datadoghq.com/process?columns=host,process,user,cpu,memory,start&options=normalizeCPU,showArguments&sort=cpu,DESC&tags=host%3A{{host.name}}) OR by logging in to {{host.name}} ({{host.ip}}).",
+	"tags": [
+		"poc"
+	],
+	"options": {
+		"notify_audit": false,
+		"locked": false,
+		"timeout_h": 0,
+		"new_host_delay": 598,
+		"require_full_window": true,
+		"notify_no_data": false,
+		"renotify_interval": "0",
+		"escalation_message": "",
+		"no_data_timeframe": null,
+		"include_tags": false,
+		"thresholds": {
+			"critical": 10,
+			"warning": 20,
+			"critical_recovery": 15,
+			"warning_recovery": 30
+		}
+	}
+}

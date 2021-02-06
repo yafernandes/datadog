@@ -1,0 +1,25 @@
+{
+	"id": 24739698,
+	"name": "CPU Utilization - Possible waste of resources",
+	"type": "query alert",
+	"query": "min(last_1d):avg:system.cpu.idle{*} by {host} > 50",
+	"message": "CPU Utilization - Possible waste of resources",
+	"tags": [
+		"poc"
+	],
+	"options": {
+		"notify_audit": false,
+		"locked": false,
+		"timeout_h": 0,
+		"new_host_delay": 300,
+		"require_full_window": true,
+		"notify_no_data": false,
+		"renotify_interval": "0",
+		"escalation_message": "",
+		"no_data_timeframe": null,
+		"include_tags": true,
+		"thresholds": {
+			"critical": 50
+		}
+	}
+}

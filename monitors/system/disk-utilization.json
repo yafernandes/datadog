@@ -1,0 +1,25 @@
+{
+	"name": "Device {{device.name}} on {{host.name}} will run out of space in less than a week",
+	"type": "query alert",
+	"query": "min(next_1w):forecast(avg:system.disk.free{*} by {host,device}, 'seasonal', 2, interval='60m', seasonality='weekly') <= 0",
+	"message": "{{value}}% of space used on {{device.name}}\nPlease log in to {{host.name}} [{{host.ip}}] and investigate disk usage for device {{device.name}}.",
+	"tags": [
+		"poc"
+	],
+	"options": {
+		"notify_audit": false,
+		"locked": false,
+		"timeout_h": 0,
+		"new_host_delay": 300,
+		"require_full_window": true,
+		"notify_no_data": false,
+		"renotify_interval": "0",
+		"escalation_message": "",
+		"no_data_timeframe": null,
+		"include_tags": true,
+		"thresholds": {
+			"critical": 0,
+			"critical_recovery": 1000000000
+		}
+	}
+}

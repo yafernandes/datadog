@@ -1,0 +1,20 @@
+{
+	"id": 24740050,
+	"name": "Waste of resources",
+	"type": "composite",
+	"query": "24739698 && 24739929",
+	"message": "Please review the instance size, if it is a cloud deployment, or consider moving other workloads to this host.",
+	"tags": [
+		"poc"
+	],
+	"options": {
+		"notify_audit": false,
+		"locked": false,
+		"silenced": {},
+		"include_tags": true,
+		"new_host_delay": 300,
+		"notify_no_data": false,
+		"renotify_interval": 0,
+		"escalation_message": ""
+	}
+}

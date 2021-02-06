@@ -1,0 +1,25 @@
+{
+    "name": "{{kube_deployment.name}} consuming more than 90% of available memory",
+    "type": "query alert",
+    "query": "avg(last_5m):avg:kubernetes.memory.usage{*} by {kube_deployment,cluster_name} / avg:kubernetes.memory.limits{*} by {kube_deployment,cluster_name} > 0.9",
+    "message": "Deployment {{kube_deployment.name}} on cluster {{cluster_name.name}} is running close to its available memory resources.\n\nPlease investigate.",
+    "tags": [
+        "poc"
+    ],
+    "options": {
+        "notify_audit": false,
+        "locked": false,
+        "timeout_h": 0,
+        "silenced": {},
+        "include_tags": true,
+        "no_data_timeframe": null,
+        "require_full_window": true,
+        "new_host_delay": 300,
+        "notify_no_data": false,
+        "renotify_interval": 0,
+        "escalation_message": "",
+        "thresholds": {
+            "critical": 0.9
+        }
+    }
+}
