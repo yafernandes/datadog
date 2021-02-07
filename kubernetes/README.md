@@ -47,9 +47,9 @@ agents:
     - operator: Exists
 ```
 
-Check distribution specific nodes:
+Check distribution specific notes:
 
-- [kubeadm / vanilla](kubeadm.md)
+- [kubeadm/vanilla](kubeadm.md)
 - [AKS](aks.md)
 
  Deploy with the command below.
