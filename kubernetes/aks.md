@@ -43,7 +43,7 @@ datadog:
 ## Control Plane
 
 PassS services like AKS do not give us access to control plane nodes. Since we cannot deploy agents to control plane nodes, we cannot leverage [Auto Discovery](https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes) to automatically detect and start monitoring control plane services.
-AKS exposes Kubernetes API and CoreDNS as services ans we will monitor them using [cluster checks](https://docs.datadoghq.com/agent/cluster_agent/clusterchecks/#static-configurations-in-files) for simplicity.
+AKS exposes Kubernetes API a services and we will monitor it using [cluster checks](https://docs.datadoghq.com/agent/cluster_agent/clusterchecks/#static-configurations-in-files) for simplicity.
 
 ```yaml
 clusterAgent:
@@ -55,9 +55,4 @@ clusterAgent:
         - prometheus_url: https://kubernetes.default/metrics
           ssl_ca_cert: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
           bearer_token_auth: true
-    coredns.yaml: |-
-      cluster_check: true
-      init_config:
-      instances:
-        - prometheus_url: http://dns-default.openshift-dns:9153/metrics
 ```
