@@ -19,7 +19,9 @@ process_config:
 
 ## IIS - [iis.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/iis/datadog_checks/iis/data/conf.yaml.example)
 
-Make sure that `ddagentuser` has access to IIS logs.
+Make sure that `ddagentuser` has access to IIS logs. This command gives the `ddagentuser` read access to the files required by the example below.
+
+`icacls C:\inetpub\logs\LogFiles /grant ddagentuser:(OI)(CI)RX /T`
 
 Datadog agent by default limits the numbers of files it can tail to 100. It is possible to [increase this number](https://docs.datadoghq.com/logs/faq/how-to-increase-the-number-of-log-files-tailed-by-the-agent/). It is recommended to clean up old logs files and adopt a rotation strategy that compresses, or renames, old logs.
 
