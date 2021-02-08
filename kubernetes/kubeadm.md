@@ -13,7 +13,6 @@ datadog:
       value: "etcd"
   confd:
     etcd.yaml: |-
-
       ad_identifiers:
         - etcd
       init_config:
