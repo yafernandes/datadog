@@ -51,6 +51,53 @@ clusterAgent:
           bearer_token_auth: true
 ```
 
+## Control Plane
+
+OpenShift uses the same image for different components of the Control Plane. Datadog's default Control Plane monitoring uses image names to detect services, which presents a challenge here. It might be possible to update OpenShift's Control Plane deployment to include [Autodiscovery annotations](https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes#configuration) to automatically detect and start monitoring control plane services. However, many organizations do not want to change their Control Plane deployment.
+OpenShift exposes the Kubernetes API as a service we can monitor using [cluster checks](https://docs.datadoghq.com/agent/cluster_agent/clusterchecks/#static-configurations-in-files) for simplicity.
+
+```yaml
+clusterAgent:
+  confd:
+    etcd.yaml: |-
+      cluster_check: true
+      init_config:
+      instances:
+        - use_preview: true
+          prometheus_url: https://metrics.openshift-etcd-operator/metrics
+          ssl_verify: false
+          bearer_token_auth: true
+    kube_controller_manager.yaml: |-
+      cluster_check: true
+      init_config:
+      instances:
+        - prometheus_url: https://kube-controller-manager.openshift-kube-controller-manager/metrics
+          ssl_verify: false
+          bearer_token_auth: true
+          leader_election: false
+    kube_scheduler.yaml: |-
+      cluster_check: true
+      init_config:
+      instances:
+        - prometheus_url: https://scheduler.openshift-kube-scheduler/metrics
+          ssl_verify: false
+          bearer_token_auth: true
+    kube_apiserver_metrics.yaml: |-
+      cluster_check: true
+      init_config:
+      instances:
+        - prometheus_url: https://apiserver.openshift-kube-apiserver/metrics
+          ssl_verify: false
+          bearer_token_auth: true
+    coredns.yaml: |-
+      cluster_check: true
+      init_config:
+      instances:
+        - prometheus_url: https://dns-default.openshift-dns:9154/metrics
+          ssl_verify: false
+          bearer_token_auth: true
+```
+
 <sup>1</sup> The CA below works for master nodes but not for workers.
 
 ```yaml
