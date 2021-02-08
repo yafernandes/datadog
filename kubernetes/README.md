@@ -47,10 +47,13 @@ agents:
     - operator: Exists
 ```
 
-Check distribution specific notes:
+All yaml snippets presented from here are expected to be **propertly merged** into the main `values.yaml`.
+
+Check distribution specific notes.  
 
 - [kubeadm/vanilla](kubeadm.md)
 - [AKS](aks.md)
+- [Red Hat OpenShift Container Platform v4](openshift4.md)
 
  Deploy with the command below.
 
