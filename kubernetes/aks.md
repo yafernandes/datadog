@@ -1,6 +1,6 @@
 # AKS - Azure Kubernetes Service
 
-All the yaml snippets below are expected to be **propertly merged** into the main `values.yaml`.
+All yaml snippets below are expected to be **propertly merged** into the main `values.yaml`.
 
 Notes based on AKS 1.19.6.
 
@@ -33,8 +33,8 @@ AKS certificate requires us to connect to the kubelet using the node name, inste
 
 ```yaml
 datadog:
-  env:
-    - name: DD_KUBERNETES_KUBELET_HOST
+  kubelet:
+    host:
       valueFrom:
         fieldRef:
           fieldPath: spec.nodeName
@@ -43,7 +43,7 @@ datadog:
 ## Control Plane
 
 PassS services like AKS do not give us access to control plane nodes. Since we cannot deploy agents to control plane nodes, we cannot leverage [Auto Discovery](https://docs.datadoghq.com/agent/kubernetes/integrations/?tab=kubernetes) to automatically detect and start monitoring control plane services.
-AKS exposes Kubernetes API a services and we will monitor it using [cluster checks](https://docs.datadoghq.com/agent/cluster_agent/clusterchecks/#static-configurations-in-files) for simplicity.
+AKS exposes the Kubernetes API as a services and we will monitor it using [cluster checks](https://docs.datadoghq.com/agent/cluster_agent/clusterchecks/#static-configurations-in-files) for simplicity.
 
 ```yaml
 clusterAgent:
