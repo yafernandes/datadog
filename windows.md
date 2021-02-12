@@ -3,8 +3,8 @@
 ## Agent - [datadog.yaml](https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml)
 
 ```yaml
-api_key: <api_key>
-env: <environmen>
+api_key: <API-KEY>
+env: <ENVIRONMENT>
 apm_config:
     enabled: true
 logs_enabled: true
@@ -57,7 +57,7 @@ iis.everything %{_date_time} %{_s_sitename} %{_s_computername} %{_s_ip} %{_cs_me
 
 Their names are based on field names used by IIS.
 
-```grok
+```
 _date_time %{date("yyyy-MM-dd HH:mm:ss"):date_access}
 _s_sitename %{notSpace:iis.sitename}
 _s_computername %{notSpace:network.server.name}
@@ -108,12 +108,15 @@ instances:
 
 ## Performance Counters - [pdh_check.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/pdh_check/datadog_checks/pdh_check/data/conf.yaml.example)
 
-Counter names are **CASE SENSITIVE**.
+Counter names are **CASE SENSITIVE**.  Example is based on the image below.
+
+<img src="img/perf_counters.jpg" width="400px"/>
 
 ```yaml
 init_config:
 instances:
-  - countersetname: Processor Information
+  - countersetname: SMB Server Shares
     metrics:
-      - ['% Privileged Time', pdh.processor_information.privileged_time, gauge]
+      - ['Current Data Queue Length', pdh.smb_server_shares.data_queue_length, gauge]
+      - ['Current Open File Count', pdh.smb_server_shares.open_file_count, gauge]
 ```
