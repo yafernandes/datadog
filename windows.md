@@ -57,7 +57,7 @@ iis.everything %{_date_time} %{_s_sitename} %{_s_computername} %{_s_ip} %{_cs_me
 
 Their names are based on field names used by IIS.
 
-```
+```grok
 _date_time %{date("yyyy-MM-dd HH:mm:ss"):date_access}
 _s_sitename %{notSpace:iis.sitename}
 _s_computername %{notSpace:network.server.name}
@@ -94,6 +94,7 @@ instances:
     # # It is characterized by SECDoClientHandshake() error
     # connector: odbc
     # driver: ODBC Driver 17 for SQL Server
+    database_autodiscovery: true
 ```
 
 ## Windows events - [win32_event_log.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/win32_event_log/datadog_checks/win32_event_log/data/conf.yaml.example)
