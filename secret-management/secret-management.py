@@ -8,7 +8,7 @@ import uritools
 import urllib.request
 
 
-def ksm_handler(uri, parts):
+def awssecretsmanager_handler(uri, parts):
     try:
         client = boto3.session.Session().client(
             service_name='secretsmanager',
@@ -17,7 +17,10 @@ def ksm_handler(uri, parts):
         get_secret_value_response = client.get_secret_value(
             SecretId=parts.path[1:])
         secret = get_secret_value_response['SecretString']
-        return json.loads(secret)[parts.fragment], None
+        if parts.fragment:
+            return json.loads(secret)[parts.fragment], None
+        else:
+            return secret, None
     except (Exception) as e:
         return None, str(e)
 
@@ -29,7 +32,7 @@ def url_handler(uri, parts):
         return None, str(e)
 
 schemes = {
-    "ksm": ksm_handler,
+    "awssecretsmanager": awssecretsmanager_handler,
     "file": url_handler
 }
 

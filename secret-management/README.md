@@ -2,11 +2,11 @@
 
 ## Implementation example
 
-This Python code is an implementation example of a secret backend. It expects URIs as secret handles. It supports a custom [kms](#kms-scheme) scheme and the standard [file](https://en.wikipedia.org/wiki/File_URI_scheme) scheme.
+This Python code is an implementation example of a secret backend. It expects URIs as secret handles. It supports a custom [awssecretsmanager](#awssecretsmanager-scheme) scheme and the standard [file](https://en.wikipedia.org/wiki/File_URI_scheme) scheme.
 
-### kms scheme
+### awssecretsmanager scheme
 
-It has the format `ksm://<AWS_REGION>/<SECRET_NAME>#<SECRET_KEY>`.
+It has the format `awssecretsmanager://<AWS_REGION>/<SECRET_NAME>#<SECRET_KEY>`.
 
 ### Hashicorp Vault
 
