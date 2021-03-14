@@ -56,3 +56,19 @@ clusterAgent:
           ssl_ca_cert: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
           bearer_token_auth: true
 ```
+
+## AKS 1.20
+
+AKS 1.20 has a different file structure. Logs under `/var/log/pods` have links to `/var/lib/docker/containers`. In order to continue collecting logs from files, instead of the container runtime API, we need to also mount the target location.
+
+```yaml
+agents:
+  volumeMounts:
+    - mountPath: /var/lib/docker/containers/
+      name: logpodpath-target
+  volumes:
+    - name: logpodpath-target
+      hostPath:
+        path: /var/lib/docker/containers/
+        type: DirectoryOrCreate
+```
