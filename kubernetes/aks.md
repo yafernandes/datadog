@@ -56,19 +56,3 @@ clusterAgent:
           ssl_ca_cert: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
           bearer_token_auth: true
 ```
-
-## AKS 1.20
-
-AKS 1.20 adopts Docker runtime logs location. Logs under `/var/log/pods` have symlinks to `/var/lib/docker/containers`. The Helm chart will do it automatically when using Docker as container runtime, which is not the case since AKS 1.19+ defaults to containerd.  In order to continue collecting logs from files, instead of the container runtime API, we need to also mount the target location.
-
-```yaml
-agents:
-  volumeMounts:
-    - mountPath: /var/lib/docker/containers/
-      name: logdockercontainerpath
-  volumes:
-    - name: logdockercontainerpath
-      hostPath:
-        path: /var/lib/docker/containers/
-        type: DirectoryOrCreate
-```
