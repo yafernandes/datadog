@@ -1,5 +1,11 @@
 # Personal notes
 
+## Basic installations
+
+### [Kubernetes](kubernetes/README.md)
+
+### [Windows](windows.md)
+
 ## Labs
 
 ### [Python application](https://github.com/yafernandes/app-python)
@@ -36,10 +42,13 @@
 
 [Limits applied to ingested log events](https://docs.datadoghq.com/logs/log_collection/?tab=host#custom-log-forwarding)
 
-- For optimal use, Datadog recommends a log event should not exceed 25K bytes in size. When using the Datadog Agent, log events greater than 256KB are split into several entries. When using the Datadog TCP or HTTP API directly, log events up to 1MB are accepted.
-- A log event should not have more than 100 tags, and each tag should not exceed 256 characters for a maximum of 10 million unique tags per day.
-- A log event converted to JSON format should contain less than 256 attributes. Each of those attribute’s keys should be less than 50 characters, nested in less than 10 successive levels, and their respective value should be less than 1024 characters if promoted as a facet.
-- Log events can be submitted up to 18h in the past and 2h in the future.
+- Log entry limits
+  - 100 tags, 256 characters each, 10MM/day
+  - JSON format should contain less than 256 attributes
+    - Keys should be less than 50 characters
+      - Nested in less than 10 successive levels
+      - If promoted as a facet 1024 characters if promoted as a facet
+  - 18h in the past and 2h in the future
 
 ## Masking
 
