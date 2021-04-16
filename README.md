@@ -1,4 +1,4 @@
-# Personal notes
+# Datadog
 
 ## Basic installations
 
@@ -13,6 +13,10 @@
 ### [Kafka client](https://github.com/yafernandes/kafka-client)
 
 ### [Java instrumented logs](https://github.com/yafernandes/instrumented-logs)
+
+### [Tags-Tags-Tags](https://github.com/yafernandes/tags-tags-tags)
+
+### [Transparent Proxy](https://github.com/yafernandes/transparent-proxy)
 
 ## Information Scrubbing
 
