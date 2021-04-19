@@ -2,7 +2,7 @@
 
 All yaml snippets below are expected to be **propertly merged** into the main `values.yaml`.
 
-Notes based on AKS 1.19.6.
+Notes based on AKS 1.20.2.
 
 Recently [AKS adopted containerd](https://docs.microsoft.com/en-us/azure/aks/cluster-configuration?utm_source=thenewstack&utm_medium=website&utm_campaign=platform#container-runtime-configuration) as its default container runtime. The default container runtime for Datadog is Docker.  We need to configure the path for the containerd socket with the snippet below.
 
@@ -11,25 +11,7 @@ datadog:
   criSocketPath: /var/run/containerd/containerd.sock
 ```
 
-AKS kubelet [requires clients to authenticate](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet-tls-bootstrapping/#client-and-serving-certificates) with a certificate. We need to mount it and set it with the snippet below.
-
-```yaml
-datadog:
-  env:
-    - name: DD_KUBELET_CLIENT_CA
-      value: "/host/etc/kubernetes/certs/kubeletserver.crt"
-agents:
-  volumeMounts:
-    - mountPath: /host/etc/kubernetes/certs
-      name: kubernetes-certs
-  volumes:
-    - name: kubernetes-certs
-      hostPath:
-        path: /etc/kubernetes/certs
-        type: DirectoryOrCreate
-```
-
-AKS certificate requires us to connect to the kubelet using the node name, instead of just its ip address. It can be achiece with the snippet below.
+AKS kubelet [requires clients to authenticate](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet-tls-bootstrapping/#client-and-serving-certificates) with a certificate and to connect to the kubelet using the node name, instead of just its ip address. It can be achiece with the snippet below.
 
 ```yaml
 datadog:
@@ -38,6 +20,7 @@ datadog:
       valueFrom:
         fieldRef:
           fieldPath: spec.nodeName
+    hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
 ```
 
 ## Control Plane
