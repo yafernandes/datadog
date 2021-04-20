@@ -1,0 +1,40 @@
+datadog:
+  clusterName: kubeadm
+  apiKeyExistingSecret: datadog-keys
+  apm:
+    enabled: true
+  logs:
+    enabled: true
+    containerCollectAll: true
+  processAgent:
+    processCollection: true
+  networkMonitoring:
+    enabled: true
+  dogstatsd:
+    useHostPort: true
+  criSocketPath: /var/run/containerd/containerd.sock
+  env:
+    - name: DD_IGNORE_AUTOCONF
+      value: "etcd"
+  confd:
+    etcd.yaml: |-
+      ad_identifiers:
+        - etcd
+      init_config:
+      instances:
+        - prometheus_url: https://%%host%%:2379/metrics
+          ssl_ca_cert: /host/etc/kubernetes/pki/etcd/ca.crt
+          ssl_cert: /host/etc/kubernetes/pki/etcd/peer.crt
+          ssl_private_key: /host/etc/kubernetes/pki/etcd/peer.key
+agents:
+  # This toleration allows the agent to be deployed to every node. Usually not required for managed clusters.
+  tolerations:
+    - operator: Exists
+  volumeMounts:
+    - mountPath: /host/etc/kubernetes/pki/etcd
+      name: etcd-certs
+  volumes:
+    - name: etcd-certs
+      hostPath:
+        path: /etc/kubernetes/pki/etcd
+        type: DirectoryOrCreate
