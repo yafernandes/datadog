@@ -38,9 +38,6 @@ datadog:
     enabled: true
   dogstatsd:
     useHostPort: true
-  env:
-    - name: DD_ENV
-      value: <ENVIRONMENT>
 agents:
   # This toleartion allows the agent to be deployed to every node.
   tolerations:
