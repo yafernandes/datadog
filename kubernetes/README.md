@@ -39,7 +39,7 @@ datadog:
   dogstatsd:
     useHostPort: true
 agents:
-  # This toleartion allows the agent to be deployed to every node.
+  # This toleartion allows the agent to be deployed to every node. Usually not required for managed clusters.
   tolerations:
     - operator: Exists
 ```
