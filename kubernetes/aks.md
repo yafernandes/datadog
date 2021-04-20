@@ -2,7 +2,11 @@
 
 All yaml snippets below are expected to be **propertly merged** into the main `values.yaml`.
 
-Notes based on AKS 1.20.2.
+Notes based on:
+
+- AKS 1.20.2
+- Agent 7.27.0
+- Cluster Agent 1.11.0
 
 Recently [AKS adopted containerd](https://docs.microsoft.com/en-us/azure/aks/cluster-configuration?utm_source=thenewstack&utm_medium=website&utm_campaign=platform#container-runtime-configuration) as its default container runtime. The default container runtime for Datadog is Docker.  We need to configure the path for the containerd socket with the snippet below.
 
