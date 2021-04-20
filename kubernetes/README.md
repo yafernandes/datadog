@@ -58,6 +58,8 @@ Check distribution specific notes.
 helm install datadog datadog/datadog -n datadog -f values.yaml
 ```
 
+Complete values file examples can be found [here](examples).
+
 **Note**: OpenShift [metrics](https://docs.datadoghq.com/integrations/openshift/#metrics) are all about quotas.  The statment below must return something for OpenShift specific metrics to show up.
 
 `oc get clusterresourcequotas --all-namespaces`

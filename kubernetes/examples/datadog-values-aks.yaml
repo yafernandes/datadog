@@ -1,0 +1,30 @@
+datadog:
+  clusterName: aks
+  apiKeyExistingSecret: datadog-keys
+  apm:
+    enabled: true
+  logs:
+    enabled: true
+    containerCollectAll: true
+  processAgent:
+    processCollection: true
+  networkMonitoring:
+    enabled: true
+  dogstatsd:
+    useHostPort: true
+  criSocketPath: /var/run/containerd/containerd.sock
+  kubelet:
+    host:
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
+    hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
+clusterAgent:
+  confd:
+    kube_apiserver_metrics.yaml: |-
+      cluster_check: true
+      init_config:
+      instances:
+        - prometheus_url: https://kubernetes.default/metrics
+          ssl_ca_cert: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+          bearer_token_auth: true
