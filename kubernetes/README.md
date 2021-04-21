@@ -1,5 +1,9 @@
 # Kubernetes basic  monitoring
 
+Notes based on:
+
+- Helm Chart 2.11.0
+
 ## Install
 
 Install [Datadog Helm Chart](https://github.com/DataDog/helm-charts/tree/master/charts/datadog)
