@@ -1,0 +1,72 @@
+datadog:
+  clusterName: openshift4
+  apiKeyExistingSecret: datadog-keys
+  apm:
+    enabled: true
+  logs:
+    enabled: true
+    containerCollectAll: true
+  processAgent:
+    processCollection: true
+  networkMonitoring:
+    enabled: true
+  dogstatsd:
+    useHostPort: true
+  criSocketPath: /var/run/crio/crio.sock
+  kubelet:
+    hostCAPath: /etc/kubernetes/kubelet-ca.crt
+  useHostNetwork: true
+  kubeStateMetricsEnabled: false
+agents:
+  # This toleration allows the agent to be deployed to every node. Usually not required for managed clusters.
+  tolerations:
+    - operator: Exists
+  podSecurity:
+    securityContextConstraints:
+      create: true
+clusterAgent:
+  confd:
+    kubernetes_state.yaml: |-
+      cluster_check: true
+      init_config:
+      instances:
+        - kube_state_url: https://kube-state-metrics.openshift-monitoring:8443/metrics
+          ssl_verify: false
+          bearer_token_auth: true
+    etcd.yaml: |-
+      cluster_check: true
+      init_config:
+      instances:
+        - use_preview: true
+          prometheus_url: https://metrics.openshift-etcd-operator/metrics
+          ssl_verify: false
+          bearer_token_auth: true
+    kube_controller_manager.yaml: |-
+      cluster_check: true
+      init_config:
+      instances:
+        - prometheus_url: https://kube-controller-manager.openshift-kube-controller-manager/metrics
+          ssl_verify: false
+          bearer_token_auth: true
+          leader_election: false
+    kube_scheduler.yaml: |-
+      cluster_check: true
+      init_config:
+      instances:
+        - prometheus_url: https://scheduler.openshift-kube-scheduler/metrics
+          ssl_verify: false
+          bearer_token_auth: true
+    kube_apiserver_metrics.yaml: |-
+      cluster_check: true
+      init_config:
+      instances:
+        - prometheus_url: https://apiserver.openshift-kube-apiserver/metrics
+          ssl_verify: false
+          bearer_token_auth: true
+    coredns.yaml: |-
+      cluster_check: true
+      init_config:
+      instances:
+        - prometheus_url: https://dns-default.openshift-dns:9154/metrics
+          ssl_verify: false
+          bearer_token_auth: true

@@ -2,7 +2,11 @@
 
 All yaml snippets below are expected to be **propertly merged** into the main `values.yaml`.
 
-Notes based on OpenShift 4.6.15.
+Notes based on:
+
+- OpenShift 4.7.6
+- Agent 7.27.0
+- Cluster Agent 1.11.0
 
 Deploying Datadog will require an [SCC](https://docs.openshift.com/container-platform/4.5/authentication/managing-security-context-constraints.html). Use the snippet below to have our Helm chart [apply it](https://docs.datadoghq.com/integrations/openshift/?tab=helm#configuration).
 
@@ -20,12 +24,12 @@ datadog:
   criSocketPath: /var/run/crio/crio.sock
 ```
 
-I currently ignore certificate validation since I could not figure out what is the correct CA<sup>1</sup>.
+Openshift kubelet [requires clients to authenticate](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet-tls-bootstrapping/#client-and-serving-certificates) with a certificate. It can be achieved with the snippet below.
 
 ```yaml
 datadog:
   kubelet:
-    tlsVerify: false
+    hostCAPath: /etc/kubernetes/kubelet-ca.crt
 ```
 
 If the OpenShift is running on a supported cloud provider, you should run the agent on the host network. Access to metadata servers from the PODs network is restricted. It will permit the agent to retrieve metadata information about the host from the cloud provier.
@@ -96,12 +100,4 @@ clusterAgent:
         - prometheus_url: https://dns-default.openshift-dns:9154/metrics
           ssl_verify: false
           bearer_token_auth: true
-```
-
-<sup>1</sup> The CA below works for master nodes but not for workers.
-
-```yaml
-# For later...
-    - name: DD_KUBELET_CLIENT_CA
-      value: "/etc/kubernetes/kubelet-ca.crt"
 ```
