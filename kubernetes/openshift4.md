@@ -5,6 +5,7 @@ All yaml snippets below are expected to be **propertly merged** into the main `v
 Notes based on:
 
 - OpenShift 4.7.6
+- Helm Chart 2.11.0
 - Agent 7.27.0
 - Cluster Agent 1.11.0
 
