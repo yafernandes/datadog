@@ -15,7 +15,7 @@ datadog:
   criSocketPath: /var/run/containerd/containerd.sock
 ```
 
-AKS kubelet [requires clients to authenticate](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet-tls-bootstrapping/#client-and-serving-certificates) with a certificate and to connect to the kubelet using the node name, instead of just its ip address. It can be achiece with the snippet below.
+AKS kubelet [requires clients to authenticate](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet-tls-bootstrapping/#client-and-serving-certificates) with a certificate and to connect to the kubelet using the node name, instead of just its ip address. It can be achieved with the snippet below.
 
 ```yaml
 datadog:
