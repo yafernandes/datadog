@@ -5,9 +5,9 @@ All the yaml snippets below are expected to be **propertly merged** into the mai
 Notes based on:
 
 - Kubernetes 1.21.0
-- Helm Chart 2.11.0
+- Helm Chart 2.12.3
 - Agent 7.27.0
-- Cluster Agent 1.11.0
+- Cluster Agent 1.12.0
 
 Recently [Kubernetes deprecated Docker/Dockershim](https://kubernetes.io/blog/2020/12/02/dockershim-faq/). The default container runtime for Datadog Helm chart is Docker.  If using containerd as Container Runtime, we need to configure the path for the containerd socket with the snippet below.
 
@@ -22,9 +22,8 @@ Kubernetes etcd requires PKI certificates for authetication over TLS. The snippe
 
 ```yaml
 datadog:
-  env:
-    - name: DD_IGNORE_AUTOCONF
-      value: "etcd"
+  ignoreAutoConfig:
+  - etcd
   confd:
     etcd.yaml: |-
       ad_identifiers:

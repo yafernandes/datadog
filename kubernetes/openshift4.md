@@ -5,9 +5,9 @@ All yaml snippets below are expected to be **propertly merged** into the main `v
 Notes based on:
 
 - OpenShift 4.7.6
-- Helm Chart 2.11.0
+- Helm Chart 2.12.3
 - Agent 7.27.0
-- Cluster Agent 1.11.0
+- Cluster Agent 1.12.0
 
 Deploying Datadog will require an [SCC](https://docs.openshift.com/container-platform/4.5/authentication/managing-security-context-constraints.html). Use the snippet below to have our Helm chart [apply it](https://docs.datadoghq.com/integrations/openshift/?tab=helm#configuration).
 
@@ -38,22 +38,6 @@ If the OpenShift is running on a supported cloud provider, you should run the ag
 ```yaml
 agents:
   useHostNetwork: true
-```
-
-OpenShift comes with its own Kube State Metrics server so there is not need to deploy our own. OpenShift exposes the Kube State Metrics server as a services and we will monitor it using [cluster checks](https://docs.datadoghq.com/agent/cluster_agent/clusterchecks/#static-configurations-in-files) for simplicity.
-
-```yaml
-datadog:
-  kubeStateMetricsEnabled: false
-clusterAgent:
-  confd:
-    kubernetes_state.yaml: |-
-      cluster_check: true
-      init_config:
-      instances:
-        - kube_state_url: https://kube-state-metrics.openshift-monitoring:8443/metrics
-          ssl_verify: false
-          bearer_token_auth: true
 ```
 
 ## Control Plane

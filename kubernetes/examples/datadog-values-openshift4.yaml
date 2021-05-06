@@ -12,11 +12,13 @@ datadog:
     enabled: true
   dogstatsd:
     useHostPort: true
+  kubeStateMetricsCore:
+    enabled: true
+  kubeStateMetricsEnabled: false
   criSocketPath: /var/run/crio/crio.sock
   kubelet:
     hostCAPath: /etc/kubernetes/kubelet-ca.crt
   useHostNetwork: true
-  kubeStateMetricsEnabled: false
 agents:
   # This toleration allows the agent to be deployed to every node. Usually not required for managed clusters.
   tolerations:
@@ -26,13 +28,6 @@ agents:
       create: true
 clusterAgent:
   confd:
-    kubernetes_state.yaml: |-
-      cluster_check: true
-      init_config:
-      instances:
-        - kube_state_url: https://kube-state-metrics.openshift-monitoring:8443/metrics
-          ssl_verify: false
-          bearer_token_auth: true
     etcd.yaml: |-
       cluster_check: true
       init_config:

@@ -12,10 +12,12 @@ datadog:
     enabled: true
   dogstatsd:
     useHostPort: true
+  kubeStateMetricsCore:
+    enabled: true
+  kubeStateMetricsEnabled: false
   criSocketPath: /var/run/containerd/containerd.sock
-  env:
-    - name: DD_IGNORE_AUTOCONF
-      value: "etcd"
+  ignoreAutoConfig:
+  - etcd
   confd:
     etcd.yaml: |-
       ad_identifiers:

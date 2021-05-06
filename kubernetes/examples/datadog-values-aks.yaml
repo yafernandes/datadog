@@ -12,6 +12,9 @@ datadog:
     enabled: true
   dogstatsd:
     useHostPort: true
+  kubeStateMetricsCore:
+    enabled: true
+  kubeStateMetricsEnabled: false
   criSocketPath: /var/run/containerd/containerd.sock
   kubelet:
     host:
