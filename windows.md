@@ -84,6 +84,8 @@ _trace_id %{notSpace:datadog.trace_id:nullIf("-")}
 
 ## MS SQLServer - [sqlserver.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example)
 
+Make sure you first complete the [prerequisites](https://docs.datadoghq.com/integrations/sqlserver/?tab=host#prerequisite).
+
 ```yaml
 init_config:
 instances:
@@ -102,9 +104,24 @@ instances:
 You can check exinting channels at C:\windows\System32\Winevt\Logs\
 
 ```yaml
+init_config:
+  tag_event_id: true
 instances:
-  - path: Security
+  - path: System
     legacy_mode: false
+    start: oldest
+    filters:
+      id:
+        - 41
+        - 1074
+        - 6006
+        - 6008
+  - path: Application
+    legacy_mode: false
+    start: oldest
+    filters:
+      source:
+        - MSSQLSERVER
 ```
 
 ## Performance Counters - [pdh_check.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/pdh_check/datadog_checks/pdh_check/data/conf.yaml.example)
