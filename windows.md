@@ -126,15 +126,16 @@ instances:
 
 ## Performance Counters - [pdh_check.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/pdh_check/datadog_checks/pdh_check/data/conf.yaml.example)
 
-Counter names are **CASE SENSITIVE**.  Example is based on the image below.
+Counter names are **CASE SENSITIVE**.  Example is based on the image below and you can find more info on those counter [here](https://docs.microsoft.com/en-us/archive/blogs/askcore/measuring-disk-latency-with-windows-performance-monitor-perfmon).
 
 <img src="img/perf_counters.jpg" width="400px"/>
 
 ```yaml
 init_config:
 instances:
-  - countersetname: SMB Server Shares
+  - countersetname: PhysicalDisk
     metrics:
-      - ['Current Data Queue Length', pdh.smb_server_shares.data_queue_length, gauge]
-      - ['Current Open File Count', pdh.smb_server_shares.open_file_count, gauge]
+      - ['Avg. Disk sec/Read', pdh.physicaldisk.avg_disk_read, gauge]
+      - ['Avg. Disk sec/Transfer', pdh.physicaldisk.avg_disk_transfer, gauge]
+      - ['Avg. Disk sec/Write', pdh.physicaldisk.avg_disk_write, gauge]
 ```
