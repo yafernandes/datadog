@@ -4,17 +4,10 @@ All the yaml snippets below are expected to be **propertly merged** into the mai
 
 Notes based on:
 
-- Kubernetes 1.21.0
-- Helm Chart 2.12.3
-- Agent 7.27.0
-- Cluster Agent 1.12.0
-
-Recently [Kubernetes deprecated Docker/Dockershim](https://kubernetes.io/blog/2020/12/02/dockershim-faq/). The default container runtime for Datadog Helm chart is Docker.  If using containerd as Container Runtime, we need to configure the path for the containerd socket with the snippet below.
-
-```yaml
-datadog:
-  criSocketPath: /var/run/containerd/containerd.sock
-```
+- Kubernetes 1.22.0
+- Helm Chart 2.20.1
+- Agent 7.30.0
+- Cluster Agent 1.14.0
 
 ## etcd - [etcd.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/etcd/datadog_checks/etcd/data/conf.yaml.example)
 
@@ -43,4 +36,13 @@ agents:
       hostPath:
         path: /etc/kubernetes/pki/etcd
         type: DirectoryOrCreate
+```
+
+## Note
+
+Kubeadm 1.22 deployment has `kube-controller-manager` and `kube-scheduler` listening only on `127.0.0.1`.  Although the agent can listen on the host network space, I would suggest updating the control plane to listen on `0.0.0.0`.
+
+```bash
+sudo sed -i '/--bind-address=127.0.0.1/d' /etc/kubernetes/manifests/kube-scheduler.yaml
+sudo sed -i '/--bind-address=127.0.0.1/d' /etc/kubernetes/manifests/kube-controller-manager.yaml
 ```

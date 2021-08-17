@@ -1,3 +1,9 @@
+###
+# Kubernetes 1.22.0
+# Helm Chart 2.20.1
+# Agent 7.27.0
+# Cluster Agent 1.12.0
+###
 datadog:
   clusterName: kubeadm
   apiKeyExistingSecret: datadog-keys
@@ -8,14 +14,22 @@ datadog:
     containerCollectAll: true
   processAgent:
     processCollection: true
-  networkMonitoring:
-    enabled: true
   dogstatsd:
     useHostPort: true
   kubeStateMetricsCore:
     enabled: true
   kubeStateMetricsEnabled: false
-  criSocketPath: /var/run/containerd/containerd.sock
+  kubelet:
+    tlsVerify: false
+  networkMonitoring:
+    enabled: true
+  securityAgent:
+    compliance:
+      enabled: true
+    runtime:
+      enabled: true
+      syscallMonitor:
+        enabled: true
   ignoreAutoConfig:
   - etcd
   confd:
@@ -29,7 +43,6 @@ datadog:
           ssl_cert: /host/etc/kubernetes/pki/etcd/peer.crt
           ssl_private_key: /host/etc/kubernetes/pki/etcd/peer.key
 agents:
-  # This toleration allows the agent to be deployed to every node. Usually not required for managed clusters.
   tolerations:
     - operator: Exists
   volumeMounts:

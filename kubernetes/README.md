@@ -2,10 +2,10 @@
 
 Notes based on:
 
-- Kubernetes 1.21.0
-- Helm Chart 2.12.3
-- Agent 7.27.0
-- Cluster Agent 1.12.0
+- Kubernetes 1.22.0
+- Helm Chart 2.20.1
+- Agent 7.30.0
+- Cluster Agent 1.14.0
 
 ## Install
 
@@ -41,15 +41,24 @@ datadog:
     containerCollectAll: true
   processAgent:
     processCollection: true
-  networkMonitoring:
-    enabled: true
   dogstatsd:
     useHostPort: true
   kubeStateMetricsCore:
     enabled: true
   kubeStateMetricsEnabled: false
+  kubelet:
+    tlsVerify: false
+  networkMonitoring:
+    enabled: true
+  securityAgent:
+    compliance:
+      enabled: true
+    runtime:
+      enabled: true
+      syscallMonitor:
+        enabled: true
 agents:
-  # This toleration allows the agent to be deployed to every node. Usually not required for managed clusters.
+  # This toleration allows the agent to be deployed to every node.
   tolerations:
     - operator: Exists
 ```
