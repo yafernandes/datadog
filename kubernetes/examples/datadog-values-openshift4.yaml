@@ -36,6 +36,8 @@ agents:
   podSecurity:
     securityContextConstraints:
       create: true
+  # Uncomment if you are running on a supported cloud provider.
+  # useHostNetwork: true
 clusterAgent:
   confd:
     kube_controller_manager.yaml: |-
