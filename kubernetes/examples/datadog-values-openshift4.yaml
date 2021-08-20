@@ -1,5 +1,11 @@
+###
+# OpenShift 4.8.5
+# Helm Chart 2.20.1
+# Agent 7.30.0
+# Cluster Agent 1.14.0
+###
 datadog:
-  clusterName: openshift4
+  clusterName: openshift
   apiKeyExistingSecret: datadog-keys
   apm:
     enabled: true
@@ -8,19 +14,23 @@ datadog:
     containerCollectAll: true
   processAgent:
     processCollection: true
-  networkMonitoring:
-    enabled: true
   dogstatsd:
     useHostPort: true
   kubeStateMetricsCore:
     enabled: true
   kubeStateMetricsEnabled: false
-  criSocketPath: /var/run/crio/crio.sock
   kubelet:
-    hostCAPath: /etc/kubernetes/kubelet-ca.crt
-  useHostNetwork: true
+    tlsVerify: false
+  networkMonitoring:
+    enabled: true
+  securityAgent:
+    compliance:
+      enabled: true
+    runtime:
+      enabled: true
+      syscallMonitor:
+        enabled: true
 agents:
-  # This toleration allows the agent to be deployed to every node. Usually not required for managed clusters.
   tolerations:
     - operator: Exists
   podSecurity:
@@ -28,14 +38,6 @@ agents:
       create: true
 clusterAgent:
   confd:
-    etcd.yaml: |-
-      cluster_check: true
-      init_config:
-      instances:
-        - use_preview: true
-          prometheus_url: https://metrics.openshift-etcd-operator/metrics
-          ssl_verify: false
-          bearer_token_auth: true
     kube_controller_manager.yaml: |-
       cluster_check: true
       init_config:
