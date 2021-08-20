@@ -1,8 +1,8 @@
 ###
 # Kubernetes 1.22.0
 # Helm Chart 2.20.1
-# Agent 7.27.0
-# Cluster Agent 1.12.0
+# Agent 7.30.0
+# Cluster Agent 1.14.0
 ###
 datadog:
   clusterName: kubeadm
