@@ -4,29 +4,10 @@ All yaml snippets below are expected to be **propertly merged** into the main `v
 
 Notes based on:
 
-- AKS 1.20.2
-- Helm Chart 2.11.0
-- Agent 7.27.0
-- Cluster Agent 1.11.0
-
-Recently [AKS adopted containerd](https://docs.microsoft.com/en-us/azure/aks/cluster-configuration?utm_source=thenewstack&utm_medium=website&utm_campaign=platform#container-runtime-configuration) as its default container runtime. The default container runtime for Datadog is Docker.  We need to configure the path for the containerd socket with the snippet below.
-
-```yaml
-datadog:
-  criSocketPath: /var/run/containerd/containerd.sock
-```
-
-AKS kubelet [requires clients to authenticate](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet-tls-bootstrapping/#client-and-serving-certificates) with a certificate and to connect to the kubelet using the node name, instead of just its ip address. It can be achieved with the snippet below.
-
-```yaml
-datadog:
-  kubelet:
-    host:
-      valueFrom:
-        fieldRef:
-          fieldPath: spec.nodeName
-    hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
-```
+- AKS 1.21.2
+- Helm Chart 2.20.1
+- Agent 7.30.0
+- Cluster Agent 1.14.0
 
 ## Control Plane
 
@@ -43,4 +24,18 @@ clusterAgent:
         - prometheus_url: https://kubernetes.default/metrics
           ssl_ca_cert: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
           bearer_token_auth: true
+```
+
+## kubelet - [kubelet.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/kubelet/datadog_checks/kubelet/data/conf.yaml.example)
+
+If `tlsVerify: false` is not acceptable, you can specify the host and CA for the kubelet.
+
+```yaml
+datadog:
+  kubelet:
+    host:
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
+    hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
 ```

@@ -8,20 +8,22 @@ datadog:
     containerCollectAll: true
   processAgent:
     processCollection: true
-  networkMonitoring:
-    enabled: true
   dogstatsd:
     useHostPort: true
   kubeStateMetricsCore:
     enabled: true
   kubeStateMetricsEnabled: false
-  criSocketPath: /var/run/containerd/containerd.sock
   kubelet:
-    host:
-      valueFrom:
-        fieldRef:
-          fieldPath: spec.nodeName
-    hostCAPath: /etc/kubernetes/certs/kubeletserver.crt
+    tlsVerify: false
+  networkMonitoring:
+    enabled: true
+  securityAgent:
+    compliance:
+      enabled: true
+    runtime:
+      enabled: true
+      syscallMonitor:
+        enabled: true
 clusterAgent:
   confd:
     kube_apiserver_metrics.yaml: |-
