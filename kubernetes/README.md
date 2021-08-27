@@ -69,6 +69,7 @@ Check distribution specific notes.
 
 - [kubeadm/vanilla](kubeadm.md)
 - [AKS](aks.md)
+- [EKS](eks.md)
 - [Red Hat OpenShift Container Platform v4](openshift4.md)
 
  Deploy with the command below.
