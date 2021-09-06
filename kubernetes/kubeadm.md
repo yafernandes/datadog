@@ -1,13 +1,11 @@
 # Kubeadm installs
 
+![2.21.2](https://img.shields.io/badge/Datadog%20chart-2.21.2-purple?logo=Helm)
+![7.30.0](https://img.shields.io/badge/Agent-7.30.0-purple?logo=Datadog)
+![1.14.0](https://img.shields.io/badge/Cluster%20Agent-1.14.0-purple?logo=Datadog)
+![1.22.0](https://img.shields.io/badge/Kubernetes-1.22.0-blue?logo=Kubernetes)
+
 All the yaml snippets below are expected to be **propertly merged** into the main `values.yaml`.
-
-Notes based on:
-
-- Kubernetes 1.22.0
-- Helm Chart 2.20.1
-- Agent 7.30.0
-- Cluster Agent 1.14.0
 
 ## etcd - [etcd.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/etcd/datadog_checks/etcd/data/conf.yaml.example)
 
@@ -36,6 +34,20 @@ agents:
       hostPath:
         path: /etc/kubernetes/pki/etcd
         type: DirectoryOrCreate
+```
+
+## kubelet - [kubelet.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/kubelet/datadog_checks/kubelet/data/conf.yaml.example)
+
+If `tlsVerify: false` is not acceptable, you can specify the host and CA for the kubelet.
+
+```yaml
+datadog:
+  kubelet:
+    host:
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
+    hostCAPath: /var/lib/kubelet/pki/kubelet.crt
 ```
 
 ## Note

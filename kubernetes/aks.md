@@ -1,13 +1,11 @@
 # AKS - Azure Kubernetes Service
 
+![2.10.1](https://img.shields.io/badge/Datadog%20chart-2.20.1-purple?logo=Helm)
+![7.30.0](https://img.shields.io/badge/Agent-7.30.0-purple?logo=Datadog)
+![1.14.0](https://img.shields.io/badge/Cluster%20Agent-1.14.0-purple?logo=Datadog)
+![1.21.2](https://img.shields.io/badge/EKS-1.21.1-orange?logo=Amazon%20AWS)
+
 All yaml snippets below are expected to be **propertly merged** into the main `values.yaml`.
-
-Notes based on:
-
-- AKS 1.21.2
-- Helm Chart 2.20.1
-- Agent 7.30.0
-- Cluster Agent 1.14.0
 
 ## Control Plane
 

@@ -1,13 +1,11 @@
 # Red Hat OpenShift Container Platform v4
 
+![2.10.1](https://img.shields.io/badge/Datadog%20chart-2.20.1-purple?logo=Helm)
+![7.30.0](https://img.shields.io/badge/Agent-7.30.0-purple?logo=Datadog)
+![1.14.0](https://img.shields.io/badge/Cluster%20Agent-1.14.0-purple?logo=Datadog)
+![4.8.5](https://img.shields.io/badge/Open%20Shift-4.8.5-red?logo=Red%20Hat%20Open%20Shift)
+
 All yaml snippets below are expected to be **propertly merged** into the main `values.yaml`.
-
-Notes based on:
-
-- OpenShift 4.8.5
-- Helm Chart 2.20.1
-- Agent 7.30.0
-- Cluster Agent 1.14.0
 
 Deploying Datadog will require an [SCC](https://docs.openshift.com/container-platform/4.5/authentication/managing-security-context-constraints.html). Use the snippet below to have our Helm chart [apply it](https://docs.datadoghq.com/integrations/openshift/?tab=helm#configuration).
 
