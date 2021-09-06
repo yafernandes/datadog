@@ -1,11 +1,9 @@
 # Kubernetes basic  monitoring
 
-Notes based on:
-
-- Kubernetes 1.22.0
-- Helm Chart 2.20.1
-- Agent 7.30.0
-- Cluster Agent 1.14.0
+![2.21.2](https://img.shields.io/badge/Datadog%20chart-2.21.2-purple?logo=Helm)
+![7.30.0](https://img.shields.io/badge/Agent-7.30.0-purple?logo=Datadog)
+![1.14.0](https://img.shields.io/badge/Cluster%20Agent-1.14.0-purple?logo=Datadog)
+![1.22.0](https://img.shields.io/badge/Kubernetes-1.22.0-blue?logo=Kubernetes)
 
 ## Install
 
@@ -35,7 +33,7 @@ datadog:
   clusterName: <CLUSTER-NAME>
   apiKeyExistingSecret: datadog-keys
   apm:
-    enabled: true
+    portEnabled: true
   logs:
     enabled: true
     containerCollectAll: true

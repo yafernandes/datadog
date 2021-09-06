@@ -1,8 +1,14 @@
+###
+# AKS 1.21.2
+# Helm Chart 2.21.2
+# Agent 7.30.0
+# Cluster Agent 1.14.0
+###
 datadog:
   clusterName: aks
   apiKeyExistingSecret: datadog-keys
   apm:
-    enabled: true
+    portEnabled: true
   logs:
     enabled: true
     containerCollectAll: true

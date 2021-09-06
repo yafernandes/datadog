@@ -1,6 +1,6 @@
 ###
 # Kubernetes 1.22.0
-# Helm Chart 2.20.1
+# Helm Chart 2.21.2
 # Agent 7.30.0
 # Cluster Agent 1.14.0
 ###
@@ -8,7 +8,7 @@ datadog:
   clusterName: kubeadm
   apiKeyExistingSecret: datadog-keys
   apm:
-    enabled: true
+    portEnabled: true
   logs:
     enabled: true
     containerCollectAll: true
