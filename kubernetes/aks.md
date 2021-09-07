@@ -1,9 +1,9 @@
 # AKS - Azure Kubernetes Service
 
-![2.10.1](https://img.shields.io/badge/Datadog%20chart-2.20.1-purple?logo=Helm)
-![7.30.0](https://img.shields.io/badge/Agent-7.30.0-purple?logo=Datadog)
-![1.14.0](https://img.shields.io/badge/Cluster%20Agent-1.14.0-purple?logo=Datadog)
-![1.21.2](https://img.shields.io/badge/AKS-1.21.2-blue?logo=Microsoft%20Azure)
+![2.10.1](https://img.shields.io/badge/Datadog%20chart-2.10.1-632ca6?labelColor=f0f0f0&logo=Helm&logoColor=0f1689)
+![7.30.0](https://img.shields.io/badge/Agent-7.30.0-632ca6?&labelColor=f0f0f0&logo=Datadog&logoColor=632ca6)
+![1.14.0](https://img.shields.io/badge/Cluster%20Agent-1.14.0-632ca6?labelColor=f0f0f0&logo=Datadog&logoColor=632ca6)
+![1.21.2](https://img.shields.io/badge/AKS-1.21.2-0080ff?labelColor=f0f0f0&logo=Microsoft%20Azure&logoColor=0080ff)
 
 All yaml snippets below are expected to be **propertly merged** into the main `values.yaml`.
 

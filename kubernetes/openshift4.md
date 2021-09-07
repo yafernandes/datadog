@@ -1,9 +1,9 @@
 # Red Hat OpenShift Container Platform v4
 
-![2.10.1](https://img.shields.io/badge/Datadog%20chart-2.20.1-purple?logo=Helm)
-![7.30.0](https://img.shields.io/badge/Agent-7.30.0-purple?logo=Datadog)
-![1.14.0](https://img.shields.io/badge/Cluster%20Agent-1.14.0-purple?logo=Datadog)
-![4.8.5](https://img.shields.io/badge/Open%20Shift-4.8.5-red?logo=Red%20Hat%20Open%20Shift)
+![2.10.1](https://img.shields.io/badge/Datadog%20chart-2.10.1-632ca6?labelColor=f0f0f0&logo=Helm&logoColor=0f1689)
+![7.30.0](https://img.shields.io/badge/Agent-7.30.0-632ca6?&labelColor=f0f0f0&logo=Datadog&logoColor=632ca6)
+![1.14.0](https://img.shields.io/badge/Cluster%20Agent-1.14.0-632ca6?labelColor=f0f0f0&logo=Datadog&logoColor=632ca6)
+![4.8.5](https://img.shields.io/badge/Open%20Shift-4.8.5-ee0000?labelColor=f0f0f0&logo=Red%20Hat%20Open%20Shift&logoColor=ee0000)
 
 All yaml snippets below are expected to be **propertly merged** into the main `values.yaml`.
 

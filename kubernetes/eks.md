@@ -1,9 +1,9 @@
 # EKS - Amazon Elastic Kubernetes Service
 
-![2.10.1](https://img.shields.io/badge/Datadog%20chart-2.20.1-purple?logo=Helm)
-![7.30.0](https://img.shields.io/badge/Agent-7.30.0-purple?logo=Datadog)
-![1.14.0](https://img.shields.io/badge/Cluster%20Agent-1.14.0-purple?logo=Datadog)
-![1.21.1](https://img.shields.io/badge/EKS-1.21.1-orange?logo=Amazon%20AWS)
+![2.10.1](https://img.shields.io/badge/Datadog%20chart-2.10.1-632ca6?labelColor=f0f0f0&logo=Helm&logoColor=0f1689)
+![7.30.0](https://img.shields.io/badge/Agent-7.30.0-632ca6?&labelColor=f0f0f0&logo=Datadog&logoColor=632ca6)
+![1.14.0](https://img.shields.io/badge/Cluster%20Agent-1.14.0-632ca6?labelColor=f0f0f0&logo=Datadog&logoColor=632ca6)
+![1.21.1](https://img.shields.io/badge/EKS-1.21.1-ff9900?labelColor=f0f0f0&logo=Amazon%20AWS&logoColor=ff9900)
 
 All yaml snippets below are expected to be **propertly merged** into the main `values.yaml`.
 
